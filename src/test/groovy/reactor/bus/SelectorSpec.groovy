@@ -118,9 +118,9 @@ class SelectorSpec extends Specification {
 
 		given:
 			"A UriSelector"
-			def sel1 = new UriSelector("http://user:pwd@host:80/path/segment?param=value#fragment")
+			def sel1 = new UriSelector("https://user:pwd@host:80/path/segment?param=value#fragment")
 			def sel2 = new UriSelector("http://*:80/path/segment#fragment")
-			def sel3 = new UriSelector("http://user:ENCODEDPWD@*:3000/path/segment#fragment")
+			def sel3 = new UriSelector("https://user:ENCODEDPWD@*:3000/path/segment#fragment")
 			def r = EventBus.config().sync().get()
 			def vals = [:]
 			r.on(sel1, { Event<String> ev ->
@@ -136,7 +136,7 @@ class SelectorSpec extends Specification {
 
 		when:
 			"The Selector is matched"
-			r.notify("http://user:pwd@host:80/path/segment?param=value#fragment", Event.wrap(""))
+			r.notify("https://user:pwd@host:80/path/segment?param=value#fragment", Event.wrap(""))
 
 		then:
 			"The URI has been matched and data extracted"
